@@ -28,6 +28,7 @@ When an Argus alert starts or stops firing, Home Assistant gets an `argus_alert_
 
 - Argus 0.9.0 or later, which adds API tokens.
 - Home Assistant 2025.3 or later.
+- Home Assistant 2026.3 or later shows the integration's icon; earlier releases work, with a placeholder icon.
 
 ## Install
 
