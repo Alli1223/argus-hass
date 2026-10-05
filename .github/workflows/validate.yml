@@ -1,0 +1,52 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  hassfest:
+    name: Hassfest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    name: HACS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hacs/action@main
+        with:
+          category: integration
+          # The icon lives in this repository, not in Home Assistant's brands repository.
+          ignore: brands
+
+  tests:
+    name: Tests (Home Assistant ${{ matrix.homeassistant }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: "3.14"
+            homeassistant: latest
+          # The oldest release hacs.json allows.
+          - python: "3.13"
+            homeassistant: "2025.3.0"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install
+        run: |
+          if [ "${{ matrix.homeassistant }}" = latest ]; then
+            pip install -r requirements_test.txt
+          else
+            pip install ruff "homeassistant==${{ matrix.homeassistant }}" pytest-homeassistant-custom-component
+          fi
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: pytest

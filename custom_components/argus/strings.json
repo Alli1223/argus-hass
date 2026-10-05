@@ -1,0 +1,72 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Argus",
+        "description": "Create a token in Argus under Account → API tokens. Tokens only read, so Home Assistant cannot change anything in Argus.",
+        "data": {
+          "url": "Argus URL",
+          "api_token": "API token",
+          "verify_ssl": "Verify the SSL certificate"
+        },
+        "data_description": {
+          "url": "The address you open Argus at, such as https://argus.example.com.",
+          "api_token": "Starts with argus_at_. Home Assistant sees the systems its owner sees."
+        }
+      },
+      "reauth_confirm": {
+        "title": "New Argus token",
+        "description": "Argus no longer accepts the token for {url}; it may have been revoked. Create a new one under Account → API tokens.",
+        "data": {
+          "api_token": "API token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach Argus at that address.",
+      "invalid_auth": "Argus refused the token. Check it, and that Argus is version 0.9.0 or later.",
+      "invalid_token_format": "API tokens start with argus_at_. Enrollment tokens (argus_et_) are for agents.",
+      "invalid_url": "Enter the full address, starting with https:// or http://.",
+      "unknown": "Something unexpected went wrong; the Home Assistant log has the details."
+    },
+    "abort": {
+      "already_configured": "This Argus server is already set up with this account.",
+      "reauth_successful": "The new token works.",
+      "wrong_account": "That token belongs to a different Argus account. Use one from the same account."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_interval": "How often to read Argus"
+        },
+        "data_description": {
+          "scan_interval": "Agents report every 15 seconds by default."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "online": { "name": "Online" },
+      "problem": { "name": "Problem" },
+      "agent_update": { "name": "Agent update" },
+      "container": { "name": "Container {name}" }
+    },
+    "sensor": {
+      "cpu": { "name": "CPU usage" },
+      "memory": { "name": "Memory usage" },
+      "swap": { "name": "Swap usage" },
+      "disk": { "name": "Fullest disk" },
+      "load_1": { "name": "Load (1 min)" },
+      "network_in": { "name": "Network in" },
+      "network_out": { "name": "Network out" },
+      "last_boot": { "name": "Last boot" },
+      "host_alerts": { "name": "Firing alerts" },
+      "highest_temperature": { "name": "Highest temperature" },
+      "firing_alerts": { "name": "Firing alerts" },
+      "hosts_online": { "name": "Hosts online" }
+    }
+  }
+}
