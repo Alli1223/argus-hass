@@ -73,15 +73,19 @@ async def test_the_same_account_is_set_up_once(
 
 async def test_reauth_takes_a_new_token(hass: HomeAssistant, argus: FakeArgus, config_entry: MockConfigEntry) -> None:
     config_entry.add_to_hass(hass)
+    await hass.config_entries.async_setup(config_entry.entry_id)
+    await hass.async_block_till_done()
     new_token = "argus_at_" + "b" * 43
 
     result = await config_entry.start_reauth_flow(hass)
     assert result["step_id"] == "reauth_confirm"
     result = await hass.config_entries.flow.async_configure(result["flow_id"], {CONF_API_TOKEN: new_token})
+    await hass.async_block_till_done()
 
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "reauth_successful"
     assert config_entry.data[CONF_API_TOKEN] == new_token
+    assert await hass.config_entries.async_unload(config_entry.entry_id)
 
 
 async def test_options_set_the_poll_interval(
