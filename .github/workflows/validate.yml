@@ -20,8 +20,8 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
-          # No icon in Home Assistant's brands repository yet, and no license chosen yet.
-          ignore: brands license
+          # No icon in Home Assistant's brands repository yet.
+          ignore: brands
 
   tests:
     name: Tests (Home Assistant ${{ matrix.homeassistant }})
