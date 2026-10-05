@@ -10,7 +10,7 @@
           "verify_ssl": "Verify the SSL certificate"
         },
         "data_description": {
-          "url": "The address you open Argus at, such as https://argus.example.com.",
+          "url": "The address you open Argus at in your browser.",
           "api_token": "Starts with argus_at_. Home Assistant sees the systems its owner sees."
         }
       },
@@ -49,24 +49,56 @@
   },
   "entity": {
     "binary_sensor": {
-      "online": { "name": "Online" },
-      "problem": { "name": "Problem" },
-      "agent_update": { "name": "Agent update" },
-      "container": { "name": "Container {name}" }
+      "online": {
+        "name": "Online"
+      },
+      "problem": {
+        "name": "Problem"
+      },
+      "agent_update": {
+        "name": "Agent update"
+      },
+      "container": {
+        "name": "Container {name}"
+      }
     },
     "sensor": {
-      "cpu": { "name": "CPU usage" },
-      "memory": { "name": "Memory usage" },
-      "swap": { "name": "Swap usage" },
-      "disk": { "name": "Fullest disk" },
-      "load_1": { "name": "Load (1 min)" },
-      "network_in": { "name": "Network in" },
-      "network_out": { "name": "Network out" },
-      "last_boot": { "name": "Last boot" },
-      "host_alerts": { "name": "Firing alerts" },
-      "highest_temperature": { "name": "Highest temperature" },
-      "firing_alerts": { "name": "Firing alerts" },
-      "hosts_online": { "name": "Hosts online" }
+      "cpu": {
+        "name": "CPU usage"
+      },
+      "memory": {
+        "name": "Memory usage"
+      },
+      "swap": {
+        "name": "Swap usage"
+      },
+      "disk": {
+        "name": "Fullest disk"
+      },
+      "load_1": {
+        "name": "Load (1 min)"
+      },
+      "network_in": {
+        "name": "Network in"
+      },
+      "network_out": {
+        "name": "Network out"
+      },
+      "last_boot": {
+        "name": "Last boot"
+      },
+      "host_alerts": {
+        "name": "Firing alerts"
+      },
+      "highest_temperature": {
+        "name": "Highest temperature"
+      },
+      "firing_alerts": {
+        "name": "Firing alerts"
+      },
+      "hosts_online": {
+        "name": "Hosts online"
+      }
     }
   }
 }
